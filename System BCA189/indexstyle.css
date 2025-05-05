@@ -1,0 +1,560 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #0a1b2b;
+}
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 240px; /* Adjusted to match the sidebar width */
+    width: calc(100% - 240px); /* Adjusted width based on the sidebar width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0a1b2b;
+    padding: 10px 20px;
+    color: #f0f0f0;
+    z-index: 1000;
+    height: 60px;
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+.sidebar-toggle-btn {
+    background: #0a1b2b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between button and title */
+}
+
+.page-title {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.search-container input {
+    padding: 10px 40px 10px 25px; /* top/right/bottom/left */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #787878;
+    color: #262626;
+}
+
+.search-container input::placeholder {
+    color: #262626;
+    padding-left: -30%; /* Optional — but not widely supported */
+}
+
+.search-container input:hover,
+.search-container input:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 8px rgba(26, 188, 156, 0.5);
+    background-color: #cbcbcb;
+}
+
+.search-container {
+    margin-right: 40px; /* keeps it off the right edge */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 235px; /* Slightly wider sidebar */
+    height: 100%;
+    background-color: #34495e;
+    color: #f0f0f0;
+    padding-top: 20px;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+}
+
+/* Profile Section */
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #fff; /* Adds a subtle border */
+}
+
+.sidebar .profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid #fff; /* Adds a border around the image */
+}
+
+.sidebar .username {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase; /* Uppercase username */
+    letter-spacing: 1px;
+}
+
+/* Navigation Links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #3e5664; /* Subtle border between items */
+}
+
+.sidebar ul li a:hover {
+    background-color: #1abc9c;
+    color: #fff;
+    padding-left: 30px; /* Slight padding shift on hover */
+    border-left: 4px solid #1abc9c; /* Left border on hover */
+}
+
+/* Active Link Style */
+.sidebar ul li a.active {
+    background-color: #16a085;
+    /* Sidebar Toggle Button */
+    color: #fff;
+}
+
+.sidebar-toggle-btn {
+    background: #0a1b2b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background: #1abc9c;
+}
+
+/* Sidebar Hidden Class (for mobile) */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Container */
+.container {
+    margin-left: 240px; /* Updated to match sidebar width */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.container.shifted {
+    margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.hidden {
+        transform: translateX(0);
+    }
+
+    /* Adjust topbar when sidebar is hidden */
+    .topbar {
+        left: 0; /* Make topbar full width */
+        width: 100%;
+    }
+
+    .container {
+        margin-left: 0; /* Ensure content takes up full width */
+    }
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.data-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Card Styles */
+.card {
+    background: #2c3e50;
+    border-radius: 10px;
+    padding: 15px 20px;
+    text-align: center;
+    color: #f0f0f0;
+    transition: all 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+/* Hover effect for data cards */
+.card:hover {
+    background: #34495e; /* Slightly lighter shade on hover */
+    transform: scale(1.01); /* Slightly enlarge the card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a shadow to lift the card */
+}
+
+.wide-card {
+    flex: 1 1 100%;
+}
+
+.medium-card {
+    flex: 1 1 230px;
+}
+
+.small-card {
+    flex: 1 1 150px;
+}
+
+.npk-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.npk-card {
+    flex: 1 1 230px;
+    background-color: #2c3e50;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.known-desc {
+    color: #00ff99;
+}
+
+.unknown-desc {
+    color: #ff6666;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #0a1b2b;
+}
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 240px; /* Adjusted to match the sidebar width */
+    width: calc(100% - 240px); /* Adjusted width based on the sidebar width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0a1b2b;
+    padding: 10px 20px;
+    color: #f0f0f0;
+    z-index: 1000;
+    height: 60px;
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+.sidebar-toggle-btn {
+    background: #0a1b2b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between button and title */
+}
+
+.page-title {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.search-container input {
+    padding: 10px 40px 10px 25px; /* top/right/bottom/left */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #787878;
+    color: #262626;
+}
+
+.search-container input::placeholder {
+    color: #262626;
+    padding-left: -30%; /* Optional — but not widely supported */
+}
+
+.search-container input:hover,
+.search-container input:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 8px rgba(26, 188, 156, 0.5);
+    background-color: #cbcbcb;
+}
+
+.search-container {
+    margin-right: 40px; /* keeps it off the right edge */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 235px; /* Slightly wider sidebar */
+    height: 100%;
+    background-color: #34495e;
+    color: #f0f0f0;
+    padding-top: 20px;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+}
+
+/* Profile Section */
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #fff; /* Adds a subtle border */
+}
+
+.sidebar .profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid #fff; /* Adds a border around the image */
+}
+
+.sidebar .username {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase; /* Uppercase username */
+    letter-spacing: 1px;
+}
+
+/* Navigation Links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #3e5664; /* Subtle border between items */
+}
+
+.sidebar ul li a:hover {
+    background-color: #1abc9c;
+    color: #fff;
+    padding-left: 30px; /* Slight padding shift on hover */
+    border-left: 4px solid #1abc9c; /* Left border on hover */
+}
+
+/* Active Link Style */
+.sidebar ul li a.active {
+    background-color: #16a085;
+    /* Sidebar Toggle Button */
+    color: #fff;
+}
+
+.sidebar-toggle-btn {
+    background: #0a1b2b;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background: #1abc9c;
+}
+
+/* Sidebar Hidden Class (for mobile) */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Container */
+.container {
+    margin-left: 240px; /* Updated to match sidebar width */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.container.shifted {
+    margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.hidden {
+        transform: translateX(0);
+    }
+
+    /* Adjust topbar when sidebar is hidden */
+    .topbar {
+        left: 0; /* Make topbar full width */
+        width: 100%;
+    }
+
+    .container {
+        margin-left: 0; /* Ensure content takes up full width */
+    }
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f0f0f0;
+}
+
+.data-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Card Styles */
+.card {
+    background: #2c3e50;
+    border-radius: 10px;
+    padding: 15px 20px;
+    text-align: center;
+    color: #f0f0f0;
+    transition: all 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+/* Hover effect for data cards */
+.card:hover {
+    background: #34495e; /* Slightly lighter shade on hover */
+    transform: scale(1.01); /* Slightly enlarge the card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a shadow to lift the card */
+}
+
+.wide-card {
+    flex: 2 1 100%;
+}
+
+.medium-card {
+    flex: 2 1 230px;
+}
+
+.small-card {
+    flex: 2 1 150px;
+}
+
+.npk-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.npk-card {
+    flex: 1 1 150px;
+    background-color: #2c3e50;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.known-desc {
+    color: #00ff99;
+}
+
+.unknown-desc {
+    color: #ff6666;
+}
+
+/* New Styles for the images inside the cards */
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+}
+
+.wide-card .card-content,
+.medium-card .card-content,
+.small-card .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* To give space between content and image in the cards */
+.card-content img {
+    margin-left: 10px; /* Adds some space between the text and the image */
+}
+
+.npk-card .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
